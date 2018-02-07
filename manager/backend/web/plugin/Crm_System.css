@@ -1,0 +1,38 @@
+.ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+ul.ztree {height:initial;}
+ul.ztree li {line-height:22px;}
+.ztree li a {height:22px;line-height:22px;border:1px solid #fff}
+.ztree li a:hover {min-width:50px;height: 22px;line-height:22px;background-color: #FFE6B0;border: 1px #FFB951 solid;opacity: 0.8;}
+.ztree li span {line-height:22px;}
+.ztree li span.button.switch {height:22px;line-height:22px;}
+.ztree li a.curSelectedNode {height:22px;line-height:22px;min-width:50px;padding-top:1px;}
+.Crm_System {background-color: #fff;padding: 10px;position: relative;float: left;width: 100%;}
+.SystemzTree {width:500px;float:left;border: 1px solid #3C8DBC;background: #fff;position: relative;margin:0 20px;}
+.SystemzTree>ul#treeDemo {height:500px;overflow: auto;}
+.SystemzTree>ul#treeDemo2 {height: 500px;overflow: auto;}
+.SystemzTreeTitle {text-align:center;height: 30px;line-height: 30px;background-color: #3C8DBC;color: #fff;text-indent: 10px;font-size: 14px;}
+.Crm_SystemBtn {height: 29px;line-height: 30px;background-color: #EC809C;display: inline-block;border: 0;border-radius: 10px;color: #fff;padding: 0 20px;    top: 0px;cursor: pointer;position: absolute;right: 0;border: 1px solid #ccc;}
+.Crm_SystemBtn:hover {opacity: 0.8;}
+.Crm_SystemBtn_1 {height: 29px;line-height: 30px;background-color: #DD4B39;display: inline-block;border: 0;border-radius: 10px;color: #fff;padding: 0 20px;    top: 0px;cursor: pointer;position: absolute;right: 100px;border: 1px solid #ccc;}
+.Crm_SystemBtn_1:hover {opacity: 0.8;}
+.SystemzTreeEdit {width: 685px;float: right;border: 1px solid #e52340;height: 540px;}
+.SystemzTreeEdit>ul#treeDemo {height:450px;overflow: auto;}
+.SystemzTreeEdit .ztree2btn{margin:40px 0 0 250px;}
+.SystemzTreeEdit_right_ul {text-align: center;margin-top:20px;}
+.SystemzTreeEdit_right_ul li {line-height: 40px;overflow: hidden;width: 410px;margin: 0 auto;}
+.SystemzTreeEdit_right_ul li span{display: inline-block;width: 50px;text-align: right;float:left;}
+.SystemzTreeEdit_right_ul li input[type="text"] {width: 300px;float: left;height: 20px;margin-top: 12px;}
+.SystemzTreeEdit_right_ul li label {display: inline-block;width:140px;float:left;text-align: left;cursor: pointer;}
+.SystemzTreeEdit_right_ul li label i {font-style: normal;}
+.Crm_System_Class ul {margin-top: 30px;float: left;}
+.Crm_System_Class ul li {margin-bottom: 15px;}
+.Crm_System_Class ul li span {display: inline-block;width: 70px;}
+.Crm_System_Class ul li select {width:195px;}
+#Provinceset .alert_cont label {display: inline-block;padding: 10px;width: 100px;cursor: pointer;}
+.province_edit {height: 80px;text-align: center;}
+.province_edit ul li {margin-top:10px;}
+.province_edit ul li input[type='text']{width: 280px;height: 20px;border: 1px solid #ccc;}
+.province_edit ul li label {margin-right:10px;cursor: pointer;}
+.province_edit ul li label input[type='radio'] {margin-right:5px;}
+.clearfix:after{content: "020";display: block;height: 0;clear: both;visibility: hidden;}
+.clearfix {zoom: 1;}
