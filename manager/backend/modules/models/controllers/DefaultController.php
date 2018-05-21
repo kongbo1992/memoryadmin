@@ -10,6 +10,7 @@ use backend\modules\models\models\TbModuleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\tools\DistStorage;
 
 /**
  * DefaultController implements the CRUD actions for TbModule model.
@@ -159,5 +160,12 @@ class DefaultController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionAa(){
+        $redis = DistStorage::getMainRedisConn();
+        $redis->set("kongbo","bbb");
+        $a = $redis->get("kongbo");
+        var_dump($a);die;
     }
 }
