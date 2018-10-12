@@ -24,6 +24,9 @@ return [
         'models' => [
             'class' => 'backend\modules\models\Module',
         ],
+        'customer' => [
+            'class' => 'backend\modules\customer\Module',
+        ],
     ],
     "aliases" => [
         "@mdm/admin" => "@vendor/mdmsoft/yii2-admin",
