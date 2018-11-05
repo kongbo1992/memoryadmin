@@ -27,6 +27,13 @@ return [
         'customer' => [
             'class' => 'backend\modules\customer\Module',
         ],
+        'product' => [
+            'class' => 'backend\modules\product\Module',
+        ],
+        'order' => [
+            'class' => 'backend\modules\order\Module',
+        ],
+
     ],
     "aliases" => [
         "@mdm/admin" => "@vendor/mdmsoft/yii2-admin",
