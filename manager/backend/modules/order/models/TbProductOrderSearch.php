@@ -20,7 +20,7 @@ class TbProductOrderSearch extends TbProductOrder
         return [
             [['id', 'product_id', 'num','state','customer_id','auser_id','duser_id'], 'integer'],
             [['price', 'money', 'discount'], 'number'],
-            [['linkname', 'linkphone', 'address', 'createtime', 'sales_time','name','unit'], 'safe'],
+            [['linkname', 'linkphone', 'address', 'createtime', 'sales_time','name','unit','remarks'], 'safe'],
         ];
     }
 
@@ -43,8 +43,9 @@ class TbProductOrderSearch extends TbProductOrder
     public function search($params)
     {
         $query = TbProductOrder::find()
+            ->select("tb_product_order.*,tb_product.name as name,tb_product.unit as unit")
             ->innerJoin("tb_product","tb_product.id = tb_product_order.product_id")
-            ->innerJoin("tb_customer",'tb_customer.id = ')
+            ->innerJoin("tb_customer",'tb_customer.id = tb_product_order.customer_id')
         ;
 
         // add conditions that should always apply here

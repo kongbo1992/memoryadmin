@@ -22,6 +22,7 @@ use Yii;
  * @property integer $auser_id
  * @property integer $duser_id
  * @property integer $state
+ * @property string $remarks
  */
 class TbProductOrder extends \yii\db\ActiveRecord
 {
@@ -42,6 +43,7 @@ class TbProductOrder extends \yii\db\ActiveRecord
             [['product_id', 'num', 'customer_id', 'auser_id', 'duser_id', 'state'], 'integer'],
             [['price', 'money', 'discount'], 'number'],
             [['createtime', 'sales_time'], 'safe'],
+            [['remarks'], 'string'],
             [['linkname'], 'string', 'max' => 128],
             [['linkphone'], 'string', 'max' => 11],
             [['address'], 'string', 'max' => 255],
@@ -68,7 +70,8 @@ class TbProductOrder extends \yii\db\ActiveRecord
             'customer_id' => '购买用户id',
             'auser_id' => '添加管理员id',
             'duser_id' => '删除管理员id',
-            'state' => '0.正常;1.删除',
+            'state' => '0.正常;2.删除',
+            'remarks' => '备注',
         ];
     }
 }
