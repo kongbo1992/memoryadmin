@@ -23,6 +23,10 @@ class TbProductOrder extends \common\models\TbProductOrder
 {
     public $name;
     public $unit;
+    public $num;
+    public $product_nums;
+    public $product_ids;
+    public $product;
     /**
      * @inheritdoc
      */
@@ -47,6 +51,21 @@ class TbProductOrder extends \common\models\TbProductOrder
             }
         }
         return $users;
+    }
+
+    /*
+     * 产品选择
+     */
+    public static function get_prodect()
+    {
+        $data = Yii::$app->db->createCommand("SELECT p.name,p.price,s.stock,p.id FROM tb_product p INNER JOIN tb_product_stock s ON s.product_id = p.id WHERE p.type = 2")->queryAll();
+        $result = [];
+        if ( !empty( $data ) ) {
+            foreach ( $data as $key => $value ) {
+                $result[$value['id'] ."-" . $value['name']  . "-" . $value['price'] ."-" . $value['stock']] = $value['name'] ."(售价:{$value['price']}/元;库存:{$value['stock']})";
+            }
+        }
+        return $result;
     }
 
 }
