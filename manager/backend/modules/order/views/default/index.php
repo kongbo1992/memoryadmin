@@ -15,28 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $gridColumns=[
         [
+            'class'=>'kartik\grid\ExpandRowColumn',
+            'width'=>'50px',
+            'value'=>function ($model, $key, $index, $column) {
+                return GridView::ROW_COLLAPSED;
+            },
+            'detail'=>function ($model, $key, $index, $column) {
+                return Yii::$app->controller->renderPartial('view', ['model'=>$model]);
+            },
+            'enableRowClick'=>true,
+        ],
+        [
             'attribute'=>'linkname',
             'label' => '客户名称',
         ],
         [
             'attribute'=>'linkphone',
             'label' => '客户联系电话',
-        ],
-        [
-            'attribute'=>'name',
-            'label' => '产品名称',
-        ],
-        [
-            'attribute'=>'num',
-            'label' => '销售数量',
-        ],
-        [
-            'attribute'=>'price',
-            'label' => '价格',
-            'content'=>function($model){
-                $unit = Yii::$app->params['unit'];
-                return $model->price . "/" . $unit[$model->unit];
-            }
         ],
         [
             'attribute'=>'discount',
@@ -66,9 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'header' => '操作',
             'buttons' => [
                 'subset-index' => function ($url, $model, $key) {
-                    if ( $model->type == 1 ) {
-                        return Html::a('产品管理', ['subset-index','level' => 2,'pid'=>$model->id],['data-pjax'=>'0','class'=>'btn btn-info btn-sm'] );
-                    }
+
                 },
                 'delete'=> function ($url, $model, $key){
                     return  Html::a('删除', $url,[

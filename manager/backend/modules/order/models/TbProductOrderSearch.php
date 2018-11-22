@@ -18,9 +18,9 @@ class TbProductOrderSearch extends TbProductOrder
     public function rules()
     {
         return [
-            [['id', 'product_id', 'num','state','customer_id','auser_id','duser_id'], 'integer'],
-            [['price', 'money', 'discount'], 'number'],
-            [['linkname', 'linkphone', 'address', 'createtime', 'sales_time','name','unit','remarks'], 'safe'],
+            [['id','state','customer_id','auser_id','duser_id'], 'integer'],
+            [[ 'money', 'dct_type'], 'number'],
+            [['linkname', 'linkphone', 'address', 'createtime', 'sales_time','name','unit','remarks','discount'], 'safe'],
         ];
     }
 
@@ -43,9 +43,9 @@ class TbProductOrderSearch extends TbProductOrder
     public function search($params)
     {
         $query = TbProductOrder::find()
-            ->select("tb_product_order.*,tb_product.name as name,tb_product.unit as unit")
-            ->innerJoin("tb_product","tb_product.id = tb_product_order.product_id")
-            ->innerJoin("tb_customer",'tb_customer.id = tb_product_order.customer_id')
+            ->groupBy('tb_product_order.id')
+//            ->select("tb_product_order.*")
+            ->with('tbProductOrderList')
         ;
 
         // add conditions that should always apply here
@@ -65,9 +65,7 @@ class TbProductOrderSearch extends TbProductOrder
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
             'num' => $this->num,
-            'price' => $this->price,
             'money' => $this->money,
             'discount' => $this->discount,
             'createtime' => $this->createtime,

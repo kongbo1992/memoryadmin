@@ -2,6 +2,7 @@
 
 namespace backend\modules\order\models;
 
+use common\models\TbProductOrderList;
 use Yii;
 
 /**
@@ -27,12 +28,18 @@ class TbProductOrder extends \common\models\TbProductOrder
     public $product_nums;
     public $product_ids;
     public $product;
+    public $customer;
+    public $discount_num;
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return array_merge(parent::rules());
+        return array_merge(parent::rules(),
+            [
+                [['customer','product_ids','product_nums','money','linkname','linkphone'],'required']
+            ]
+        );
     }
 
     /*
@@ -66,6 +73,10 @@ class TbProductOrder extends \common\models\TbProductOrder
             }
         }
         return $result;
+    }
+
+    public function getTbProductOrderList(){
+        return $this->hasMany(TbProductOrderList::className(),['order_id'=>'id']);
     }
 
 }

@@ -8,14 +8,12 @@ use Yii;
  * This is the model class for table "tb_product_order".
  *
  * @property integer $id
- * @property integer $product_id
- * @property integer $num
- * @property string $price
  * @property string $money
  * @property string $linkname
  * @property string $linkphone
  * @property string $address
- * @property double $discount
+ * @property integer $dct_type
+ * @property string $discount
  * @property string $createtime
  * @property string $sales_time
  * @property integer $customer_id
@@ -40,11 +38,11 @@ class TbProductOrder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'num', 'customer_id', 'auser_id', 'duser_id', 'state'], 'integer'],
-            [['price', 'money', 'discount'], 'number'],
+            [['money'], 'number'],
+            [['dct_type', 'customer_id', 'auser_id', 'duser_id', 'state'], 'integer'],
             [['createtime', 'sales_time'], 'safe'],
             [['remarks'], 'string'],
-            [['linkname'], 'string', 'max' => 128],
+            [['linkname', 'discount'], 'string', 'max' => 128],
             [['linkphone'], 'string', 'max' => 11],
             [['address'], 'string', 'max' => 255],
         ];
@@ -57,14 +55,12 @@ class TbProductOrder extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => '产品id',
-            'num' => '销售量',
-            'price' => '产品单价',
             'money' => '实际收款金额',
             'linkname' => '收货人姓名',
             'linkphone' => '收货人手机号',
             'address' => '收货地址',
-            'discount' => '特殊折扣',
+            'dct_type' => '折扣类型：0（无特殊折扣）1（折上折）2（再次优惠金额）3（新折扣）',
+            'discount' => '特殊折扣(金额或者折扣数)',
             'createtime' => '创建时间',
             'sales_time' => '销售时间',
             'customer_id' => '购买用户id',
