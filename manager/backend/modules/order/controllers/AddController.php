@@ -77,11 +77,12 @@ class AddController extends Controller
                 $productid = explode(',',$post['product_ids']);
                 $productnum = explode(',',$post['product_nums']);
                 $result = [];
-                $data = Yii::$app->db->createCommand("select id,price,name,price from tb_product WHERE id in ({$post['product_ids']}) AND type = 2 ")->queryAll();
+                $data = Yii::$app->db->createCommand("select p.id,p.price,p.name,s.stock,s.sales from tb_product p INNER JOIN tb_product_stock s ON s.product_id = p.id WHERE p.id in ({$post['product_ids']}) AND p.type = 2 ")->queryAll();
                 $product = [];
                 foreach ( $data as $key => $val ) {
                     $product[$val['id']] = $val;
                 }
+                $log = [];
                 foreach ( $productid as $key => $val ) {
                     $arr = [];
                     $arr['order_id'] = $model->id;
@@ -90,9 +91,21 @@ class AddController extends Controller
                     $arr['price'] = $product[$val]['price'];
                     $arr['product_name'] = $product[$val]['name'];
                     $result[] = $arr;
+                    Yii::$app->db->createCommand("update tb_product_stock set stock = stock - {$productnum[$key]} , sales = sales + {$productnum[$key]} WHERE product_id = {$val}")->execute();
+                    $arr1 = [];
+                    $arr1['product_id'] = $val;
+                    $arr1['reduce'] = $productnum[$key];
+                    $arr1['stock'] = $product[$val]['stock'] - $productnum[$key];
+                    $arr1['createtime'] = date("Y-m-d H:i:s");
+                    $arr1['oper_code'] = Yii::$app->user->id;
+                    $arr1['oper_event'] = "订单售出";
+                    $log[] = $arr1;
                 }
                 if(!empty($result)){
                     Yii::$app->db->createCommand()->batchInsert('tb_product_order_list', array_keys($result[0]), $result)->execute();
+                }
+                if(!empty($log)){
+                    Yii::$app->db->createCommand()->batchInsert('tb_log_stock', array_keys($log[0]), $log)->execute();
                 }
                 Yii::$app->session->setFlash("success", "订单完成！");
                 return $this->redirect(['index']);

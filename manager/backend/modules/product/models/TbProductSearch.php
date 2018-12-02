@@ -40,10 +40,10 @@ class TbProductSearch extends TbProduct
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$id=null)
     {
         $query = TbProduct::find()
-            ->andWhere(" level = 1 ")
+            ->andWhere(" type = 2 ")
         ;
 
         // add conditions that should always apply here
@@ -58,6 +58,12 @@ class TbProductSearch extends TbProduct
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
+        }
+
+        if ( !empty($id) ) {
+            $query->andWhere("pid = {$id}");
+        } else {
+            $query->andWhere("pid = 0");
         }
 
         // grid filtering conditions
